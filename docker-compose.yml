@@ -1,0 +1,42 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+    volumes: 
+      - reports:/code/reports
+
+  backend:
+    build:
+      context: ./backend 
+    networks:
+      - my_network
+    volumes: 
+      - reports:/code/reports
+
+  mysql:
+    image: mysql:8.0.26
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - my_network
+    volumes: 
+      - bd:/database
+
+networks:
+  my_network:
+    driver: bridge
+  
+volumes: 
+  reports:
+  bd:
+
