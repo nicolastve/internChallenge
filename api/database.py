@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 
 db_user = 'admin_user'
 db_password = 'admin1234'
-db_host = 'localhost'
+db_host = 'mysql'
 db_port = '3306'
 db_name = 'my_company'
 
