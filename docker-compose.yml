@@ -8,7 +8,7 @@ services:
     networks:
       - my_network
     volumes: 
-      - reports:/code/reports
+      - reports:/app/reports
 
   backend:
     build:
@@ -16,7 +16,7 @@ services:
     networks:
       - my_network
     volumes: 
-      - reports:/code/reports
+      - reports:/app/reports
 
   mysql:
     image: mysql:8.0.26

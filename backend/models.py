@@ -8,8 +8,8 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    name = Column(String, nullable=False)
     dni = Column(String, nullable=False)
+    name = Column(String, nullable=False)
     last_name = Column(String, nullable = False)
 
     entryMarks = relationship('EntryMarks', back_populates="user")
@@ -40,5 +40,7 @@ class Reports(Base):
     __tablename__ = 'reports'
 
     id = Column(Integer, primary_key=True, index=False, autoincrement=True)
-    name = Column(String, nullable = False)
-    path = Column(String, nullable = False)
+    start_date = Column(Date, nullable = False)
+    end_date = Column(Date, nullable = False)
+    status = Column(String, nullable = False)
+    path = Column(String, nullable = True)
