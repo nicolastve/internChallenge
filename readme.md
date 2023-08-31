@@ -137,19 +137,20 @@ Para la generación de reportes, debemos tener información en nuestra base de d
 
 - Tabla de usuarios:
   
-  ![image](https://github.com/nicolastve/internChallenge/assets/108106098/1af07fcb-7a3b-4b3e-aadb-0d26f240af2a)
+  ![image](https://github.com/nicolastve/internChallenge/assets/108106098/57821469-fedf-4620-8291-0ef1ae3865c2)
 
 - Tabla de entrys:
   
-  ![image](https://github.com/nicolastve/internChallenge/assets/108106098/0a0b8cdd-248c-4091-b842-a8e699209262)
+  ![image](https://github.com/nicolastve/internChallenge/assets/108106098/b233ff86-fbfd-49a5-b695-2626ac7be710)
 
 - Tabla de exits:
   
-  ![image](https://github.com/nicolastve/internChallenge/assets/108106098/e3d19066-2171-4d74-9a61-205423135b40)
+  ![image](https://github.com/nicolastve/internChallenge/assets/108106098/af31f48a-688c-4031-ba76-d002b42e375d)
+
 
 Luego podemos hacer una petición post al endpoint de generación de reportes (/generate). Donde debemos indicar el rango de fechas del reporte:
 
-![image](https://github.com/nicolastve/internChallenge/assets/108106098/d8deec80-1582-486d-ad89-5a61ddaef1d1)
+![image](https://github.com/nicolastve/internChallenge/assets/108106098/16b61b8f-584c-480b-aa96-bb50627ffbdd)
 
 Nos dará como resultado, los datos del reporte generado:
 ```json
@@ -164,11 +165,11 @@ Una vez hecha la petición, el backend tomará esta solicitud y al ver que el re
 y se pondrá a generar el reporte con reportlab, para posteriomente dejar el documento en el volumen compartido que mencionamos antes. Posterior a esto,
 cambiará el estado a "Finalized" e indicará a la base de datos la ruta en donde se encuentra el reporte, el cual, ya puede ser descargado.
 
-![image](https://github.com/nicolastve/internChallenge/assets/108106098/f1273efe-22f6-480f-a338-0e6056b17ded)
+![image](https://github.com/nicolastve/internChallenge/assets/108106098/8c789f50-f462-4022-962e-e66eec46929c)
 
 Para verificar que el reporte esta finalizado, podemos hacer una petición get al endpoint de consulta de reportes (/all_reports)
 
-![image](https://github.com/nicolastve/internChallenge/assets/108106098/7eb4c53c-f946-49ad-a38b-10469c225aa7)
+![image](https://github.com/nicolastve/internChallenge/assets/108106098/02b62aa3-3eba-49bd-b98f-4ab6f738d14e)
 
 que nos dará una lista de todos los reportes generados y sus estados:
 
@@ -185,11 +186,12 @@ que nos dará una lista de todos los reportes generados y sus estados:
 
 Para descargar, debemos utilizar el id del reporte que queremos descargar y hacer una petición get al endpoint /download
 
-![image](https://github.com/nicolastve/internChallenge/assets/108106098/55f33266-4e4e-47dc-b998-ada5cb4e9005)
+![image](https://github.com/nicolastve/internChallenge/assets/108106098/59e88b2d-1da5-49aa-b1e8-cd8cfbba7906)
 
 Como resultado:
 
-![image](https://github.com/nicolastve/internChallenge/assets/108106098/5c254cee-4dd2-4ae2-9c8e-613271e703e3)
+![image](https://github.com/nicolastve/internChallenge/assets/108106098/3fdfe409-219a-4b25-9004-7622c9d45bfc)
+
 
 
 
