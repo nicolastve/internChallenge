@@ -6,7 +6,7 @@ Consiste en una API que generera reportes de marcas, los cuales podrán ser cons
 ## Tabla de Contenidos
 - [Requisitos previos](#requisitos-previos)
 - [Estrcutura del proyecto](#estructura-del-proyecto)
-- [Configuración de Docker Dompose](#configuración-de-docker-compose)
+- [Configuración de Docker Compose](#configuración-de-docker-compose)
 - [Variables de entorno](#variables-de-entorno)
 - [Instrucciones de instalación ](#instrucciones-de-instalación)
 - [Uso](#uso)
