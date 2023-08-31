@@ -50,6 +50,7 @@ Una vez que nos posicionemos en el directorio del proyecto, nos prodremos encont
      - main.py: Archivo que maneja los endpoints para generación, consulta y descarga de los reportes.
      - models.py: Contiene los modelos de SQLAlchemy para la interación con la base de datos.
      - requirement.txt: Archivo que contiene las depencias que necesitamos.
+       
    - backend: Es un script el cual se encarga de consultar los estados de los reportes, para luego generer el documento PDF con Reportlab.
      - Dockerfile: Podremos encontrar las principales instrucciones para la construcción de la imagen de este componente. Indicamos el directorio de trabajo, instalamos la dependecias necesarias y damos accesos.
      - database.py: En este archivo es el encargado de conectarnos con la base de datos.
