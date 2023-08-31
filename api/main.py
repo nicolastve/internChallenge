@@ -18,7 +18,7 @@ def get_db():
 @app.post('/generate')
 async def generate_report(report: GenerateReport, db: Session = Depends(get_db)):
     new_report = create_report(db, report)
-    return JSONResponse(content={new_report})
+    return new_report
 
 @app.get('/all_reports')
 def get_reports(db: Session = Depends(get_db)):

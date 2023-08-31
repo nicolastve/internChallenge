@@ -1,8 +1,6 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Date, Time
+from sqlalchemy import Column, ForeignKey, Integer, String, Date, Time
 from sqlalchemy.orm import relationship
-
 from database import Base
-
 
 class User(Base):
     __tablename__ = "users"
@@ -26,6 +24,7 @@ class EntryMarks(Base):
 
     user = relationship('User', back_populates='entryMarks')
 
+
 class ExitMarks(Base):
     __tablename__ = "exitMarks"
 
@@ -35,6 +34,7 @@ class ExitMarks(Base):
     time = Column(Time, nullable = False)
 
     user = relationship('User', back_populates='exitMarks')
+
 
 class Reports(Base):
     __tablename__ = 'reports'

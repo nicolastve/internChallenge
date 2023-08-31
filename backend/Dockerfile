@@ -8,6 +8,8 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirement.txt
 
 RUN chown www-data:www-data -R /app
 
+RUN chown www-data:www-data -R /app/reports
+
 USER www-data
 
 CMD ["python", "main.py"]

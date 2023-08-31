@@ -1,22 +1,5 @@
-version: '3'
+version: '3.8'
 services:
-  api:
-    build:
-      context: ./api
-    ports:
-      - "8000:8000"
-    networks:
-      - my_network
-    volumes: 
-      - reports:/app/reports
-
-  backend:
-    build:
-      context: ./backend 
-    networks:
-      - my_network
-    volumes: 
-      - reports:/app/reports
 
   mysql:
     image: mysql:8.0.26
@@ -27,10 +10,51 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes: 
+      - .init.sql:/docker-entrypoint-initdb.d/init.sql
+      - bd:/database
+    networks:
+      - my_network
+    healthcheck:
+      test: ["CMD", 'mysqladmin', 'ping', '-h', '127.0.0.1', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD' ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+       
+  api:
+    build:
+      context: ./api
+    depends_on:
+      - mysql
+    ports:
+      - "8000:8000"
     networks:
       - my_network
     volumes: 
-      - bd:/database
+      - reports:/app/reports
+    environment:
+      db_user: ${db_user}
+      db_password: ${db_password}
+      db_host: ${db_host}
+      db_port: ${db_port}
+      db_name: ${db_name}
+
+  backend:
+    build:
+      context: ./backend 
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - my_network
+    volumes: 
+      - reports:/app/reports
+    environment:
+      db_user: ${db_user}
+      db_password: ${db_password}
+      db_host: ${db_host}
+      db_port: ${db_port}
+      db_name: ${db_name}
 
 networks:
   my_network:

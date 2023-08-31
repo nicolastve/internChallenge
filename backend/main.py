@@ -1,12 +1,11 @@
 import time
-from database import SessionLocal
 from sqlalchemy.orm import Session
-from models import Reports, EntryMarks, ExitMarks, User
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter, landscape
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib.pagesizes import landscape
-
+from models import User, Reports, ExitMarks, EntryMarks
+from database import session
 
 def get_user_entries(db: Session, start_range, end_range):
     results = db.query(User.dni, User.name, User.last_name, EntryMarks.date, EntryMarks.time, ExitMarks.time).\
@@ -19,18 +18,19 @@ def get_user_entries(db: Session, start_range, end_range):
 
     return results
 
-def generate_report(db: Session):
+def generate_report():
+
     while True:
-        all_reports = db.query(Reports).filter(Reports.status == 'Generated').all()
+        all_reports = session.query(Reports).filter(Reports.status == 'Generated').all()
         if all_reports:    
             for r in all_reports:
-                
+               
                 r.status = "Processing"
-                db.add(r)
-                db.commit()
-                db.refresh(r)
+                session.add(r)
+                session.commit()
+                session.refresh(r)
 
-                report = get_user_entries(db, r.start_date, r.end_date)
+                report = get_user_entries(session, r.start_date, r.end_date)
                 report = [list(item) for item in report]
                 report.insert(0, ['dni', 'name', 'last_name', 'date', 'entry', 'exit'])
 
@@ -49,19 +49,18 @@ def generate_report(db: Session):
                 
 
                 r.status = 'Finalized'
-                r.path = f'\\reports\\{report_name}'
-                db.add(r)
-                db.commit()
-                db.refresh(r)
-                db.close()
+                r.path = f'./reports/{report_name}'
+                session.add(r)
+                session.commit()
+                session.refresh(r)
+                session.close()
         else:
             print('There are no reports to be generated')
-            db.close()
+            session.close()
 
         time.sleep(5)
             
 
 if __name__ == "__main__":
 
-    db = SessionLocal()
-    generate_report(db)
+    generate_report()
